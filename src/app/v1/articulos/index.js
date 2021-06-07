@@ -11,7 +11,7 @@ export default makeRouter({
     '/': endpoint.save,
     '/:id': endpoint.save,
   },
-  delete: {
+  remove: {
     '/:id': endpoint.remove
   }
 })
