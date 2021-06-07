@@ -3,9 +3,16 @@
   "version": "1.0.0",
   "description": "",
   "main": "src/apps/index.js",
+  "scripts": {
+    "test": "jest --config tests/config.js"
+  },
   "workspaces": [
     "src/app/*",
     "src/utils",
     "src/utils/*"
-  ]
+  ],
+  "devDependencies": {
+    "jest": "^27.0.4",
+    "jest-esm-transformer": "^1.0.0"
+  }
 }
