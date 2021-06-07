@@ -1,0 +1,5 @@
+{
+  "name": "@app/v1",
+  "main": "index.js",
+  "type": "module"
+}
