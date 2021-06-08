@@ -9,4 +9,6 @@ const router = makeRouter({
   },
 })
 
-router.listen()
+router.listen(3333, () => {
+  console.log('listening on port')
+})
