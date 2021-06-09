@@ -1,5 +1,5 @@
 
-export const object = (object) => ({
+export const object = (object = {}) => ({
 
   reduce: function(callback, initialValue) {
     return Object
