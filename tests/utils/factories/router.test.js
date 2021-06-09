@@ -1,24 +1,26 @@
-jest.mock('express')
-
 const { expect } = require('@jest/globals')
 const { configRouter } = require('@utils/factories/router.js')
-
-const express = require('express')
 
 describe('makeRouter', () => {
 
   let makeRouter = {}
+  
+  let express = {}
   let router = {}
   
   beforeEach(() => {
-    makeRouter = configRouter({ express })
     
-    router.use = jest.fn()
-    router.get = jest.fn()
-    router.post = jest.fn()
+    router.use    = jest.fn()
+    router.get    = jest.fn()
+    router.post   = jest.fn()
     router.delete = jest.fn()
-
+    
+    express        = jest.fn()
+    express.Router = jest.fn()
+    
     express.Router.mockReturnValue(router)
+    
+    makeRouter = configRouter({ express })
   })
 
   describe('when it recibes nothing', () => {
