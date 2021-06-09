@@ -1,0 +1,5 @@
+{
+  "name": "@utils/composition",
+  "main": "index.js",
+  "type": "module"
+}
