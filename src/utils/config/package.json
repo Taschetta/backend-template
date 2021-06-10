@@ -1,0 +1,5 @@
+{
+  "name": "@utils/config",
+  "main": "index.js",
+  "type": "module"
+}
