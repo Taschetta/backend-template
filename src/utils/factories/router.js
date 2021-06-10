@@ -1,5 +1,5 @@
 
-export const configRouter = ({ express }) => ({ app = false, use, get, post, remove } = {}) => {
+export const makeRouter = ({ express }) => ({ app = false, use, get, post, remove } = {}) => {
 
   let result
 

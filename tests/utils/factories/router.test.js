@@ -1,5 +1,5 @@
 import { expect } from '@jest/globals'
-import { configRouter } from '@utils/factories/router.js'
+import { makeRouter as configRouter } from '@utils/factories/router.js'
 
 describe('makeRouter', () => {
 
