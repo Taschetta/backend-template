@@ -1,9 +1,7 @@
 import { makeEndpoint } from '@utils/factories'
 
-import controller from './controller.js'
+export default ({ controller }) => makeEndpoint({ controller })({
 
-export default makeEndpoint({
-  
   filter: async function ({ request }) {
     let query, result = {}
     

@@ -1,17 +1,11 @@
-import { makeRouter } from '@utils/globals'
+import { useTable } from '@utils/globals'
 
-import endpoint from './endpoint.js'
+import useController from './controller.js'
+import useEndpoint from './endpoint.js'
+import useRouter from './router.js'
 
-export default makeRouter({
-  get: {
-    '/': endpoint.filter,
-    '/:id': endpoint.find,
-  },
-  post: {
-    '/': endpoint.save,
-    '/:id': endpoint.save,
-  },
-  remove: {
-    '/:id': endpoint.remove
-  }
-})
+export const table = useTable('articulos')
+export const controller = useController({ table })
+export const endpoint = useEndpoint({ controller })
+
+export default useRouter({ endpoint })

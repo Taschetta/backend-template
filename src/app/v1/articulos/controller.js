@@ -1,9 +1,7 @@
-import { useTable, makeController } from '@utils/globals'
+import { makeController } from '@utils/factories'
 
-const table = useTable('articulos')
+export default ({ table }) => makeController({ table })({
 
-export default makeController({
-  
   query: function ({ id, codigo, nombre, descripcion, ...options } = {}) {
     let result
     
@@ -15,12 +13,12 @@ export default makeController({
 
     return result
   },
-
+  
   save: async function (data) {
     let result
     result = await table.save(data)
     return result
-  },
+  },    
   
   remove: async function () {
     let result
