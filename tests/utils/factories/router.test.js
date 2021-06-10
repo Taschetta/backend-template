@@ -1,9 +1,9 @@
 import { expect } from '@jest/globals'
-import { makeRouter as configRouter } from '@utils/factories/router.js'
+import { useRouter as configRouter } from '@utils/composition/router.js'
 
-describe('makeRouter', () => {
+describe('useRouter', () => {
 
-  let makeRouter = {}
+  let useRouter = {}
   
   let express = {}
   let router = {}
@@ -20,30 +20,30 @@ describe('makeRouter', () => {
     
     express.Router.mockReturnValue(router)
     
-    makeRouter = configRouter({ express })
+    useRouter = configRouter({ express })
   })
 
   describe('when it recibes nothing', () => {
     
     it('returns a router', async () => {
-      expect(makeRouter()).toEqual(router)
+      expect(useRouter()).toEqual(router)
     })
 
     it('does not call use', async () => {
-      expect(makeRouter().use).not.toHaveBeenCalled()
+      expect(useRouter().use).not.toHaveBeenCalled()
     })
 
     it('does not call get', async () => {
-      expect(makeRouter().get).not.toHaveBeenCalled()
+      expect(useRouter().get).not.toHaveBeenCalled()
       
     })
 
     it('does not call post', async () => {
-      expect(makeRouter().post).not.toHaveBeenCalled()
+      expect(useRouter().post).not.toHaveBeenCalled()
     })
 
     it('does not call remove', async () => {
-      expect(makeRouter().delete).not.toHaveBeenCalled()
+      expect(useRouter().delete).not.toHaveBeenCalled()
     })
 
   })  
@@ -52,7 +52,7 @@ describe('makeRouter', () => {
     
     it('maps it to the router', async () => {
       
-      const router = makeRouter({ 
+      const router = useRouter({ 
         use: { 
           '/articulos': 'articulos',
           '/usuarios': 'usuarios'
@@ -71,7 +71,7 @@ describe('makeRouter', () => {
 
     it('maps it to the router', async () => {
 
-      const router = makeRouter({ 
+      const router = useRouter({ 
         get: { 
           '/articulos': 'articulos',
           '/usuarios': 'usuarios'
@@ -91,7 +91,7 @@ describe('makeRouter', () => {
 
     it('maps it to the router', async () => {
 
-      const router = makeRouter({ 
+      const router = useRouter({ 
         post: { 
           '/articulos': 'articulos',
           '/usuarios': 'usuarios'
@@ -111,7 +111,7 @@ describe('makeRouter', () => {
 
     it('maps it to the router', async () => {
 
-      const router = makeRouter({ 
+      const router = useRouter({ 
         remove: { 
           '/articulos': 'articulos',
           '/usuarios': 'usuarios'
@@ -143,7 +143,7 @@ describe('makeRouter', () => {
     describe('and it recibes nothing else', () => {
       
       it('returns an empty app', async () => {
-        expect(makeRouter({ app: true })).toEqual(app)
+        expect(useRouter({ app: true })).toEqual(app)
       })
       
     })    
@@ -152,7 +152,7 @@ describe('makeRouter', () => {
       
       it('maps it to the app', async () => {
       
-        const app = makeRouter({ 
+        const app = useRouter({ 
           app: true,
           use: { 
             '/articulos': 'articulos',
@@ -170,7 +170,7 @@ describe('makeRouter', () => {
   
       it('maps it to the app', async () => {
   
-        const app = makeRouter({ 
+        const app = useRouter({ 
           app: true,
           get: { 
             '/articulos': 'articulos',
@@ -189,7 +189,7 @@ describe('makeRouter', () => {
   
       it('maps it to the app', async () => {
   
-        const app = makeRouter({ 
+        const app = useRouter({ 
           app: true,
           post: { 
             '/articulos': 'articulos',
@@ -208,7 +208,7 @@ describe('makeRouter', () => {
   
       it('maps it to the app', async () => {
   
-        const app = makeRouter({
+        const app = useRouter({
           app: true,
           remove: { 
             '/articulos': 'articulos',
