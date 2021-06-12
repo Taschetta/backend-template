@@ -1,20 +1,20 @@
 
-export const makeEndpoint = ({ controller }) => () => ({
+export const makeEndpoint = ({ controller }) => (extend = {}) => Object.create({
 
-  filter: function() {
+  filter: async function({ request }) {
+    const id = request.params.id
+    return await controller.filter({ id, ...request.query })
+  },
+
+  save: async function() {
 
   },
 
-  find: function() {
+  remove: async function() {
 
   },
 
-  save: function() {
-
-  },
-
-  remove: function() {
-
-  },
-
-})
+}, Object.entries(extend).reduce((result, [key, value]) => {
+  result[key] = { value }
+  return result
+}, {}))
