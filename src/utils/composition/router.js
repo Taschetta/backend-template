@@ -1,3 +1,4 @@
+import { object } from '@utils/helpers'
 
 export const useRouter = ({ express }) => ({ app = false, use, get, post, remove } = {}) => {
 
@@ -6,21 +7,17 @@ export const useRouter = ({ express }) => ({ app = false, use, get, post, remove
   if(app) result = express()
   else result = express.Router()
   
-  if(use) Object.entries(use).forEach(([path, routes]) => {
-    result.use(path, routes)
-  })
+  if(use) 
+    object(use).map(result.use)
 
-  if(get) Object.entries(get).forEach(([path, routes]) => {
-    result.get(path, routes)
-  })
+  if(get) 
+    object(get).map(result.get)
 
-  if(post) Object.entries(post).forEach(([path, routes]) => {
-    result.post(path, routes)
-  })
-
-  if(remove) Object.entries(remove).forEach(([path, routes]) => {
-    result.delete(path, routes)
-  })
+  if(post) 
+    object(post).map(result.post)
+    
+  if(remove) 
+    object(remove).map(result.delete)
 
   return result
 }

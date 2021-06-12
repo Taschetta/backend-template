@@ -1,3 +1,4 @@
+import { object } from '@utils/helpers'
 
 export const useTable = ({ knex }) => (name) => ({
 
@@ -6,11 +7,9 @@ export const useTable = ({ knex }) => (name) => ({
 
     if(id) query.where('id', id)
 
-    if(equal) Object.entries(equal).map(([column, value]) => {
-      query.where(column, value)
-    })
+    if(equal) object(equal).map(query.where)
 
-    if(like) Object.entries(like).map(([column, value]) => {
+    if(like) object(like).map((column, value) => {
       query.where(column, 'like', `%${value}%`)
     })
 
