@@ -7,5 +7,4 @@ import useRouter from './router.js'
 export const table = useTable('articulos')
 export const controller = useController({ table })
 export const endpoint = useEndpoint({ controller })
-
-export default useRouter({ endpoint })
+export const router = useRouter({ endpoint })

@@ -1,6 +1,6 @@
 import { makeRouter } from '@utils/globals'
 
-import articulos from './articulos/index.js'
+import { router as articulos } from './articulos/index.js'
 
 const router = makeRouter({ 
   main: true,
