@@ -56,8 +56,7 @@ export const useTable = ({ knex }) => (name) => ({
     return result[0]
   },
 
-  remove: async function(data) {
-    let id = data.id
+  remove: async function({ id }) {
     let result = {}
 
     result = await this

@@ -3,7 +3,11 @@ import { makeController } from '@utils/factories/controller.js'
 
 describe('the controller factory', () => {
   
-  let table = mockTable()
+  let table = {}
+
+  beforeEach(() => {
+    table = mockTable()
+  })
 
   describe('when a controller is made', () => {
     
@@ -66,16 +70,77 @@ describe('the controller factory', () => {
     
     describe('when the filter function is called', () => {
       
-      describe('and it recibes nothing', () => {
-        
-        let result = {}
+      let resultTable = [0,1,2]
 
-        beforeEach(async () => {
-          result = await controller.filter()
+      beforeEach(async () => {
+        table.filter.mockResolvedValue(resultTable)
+      })
+      
+      it('calls table.filter', async () => {
+        await controller.filter()
+        expect(table.filter).toHaveBeenCalled()
+      })
+      
+      it('returns its result', async () => {
+        const result = await controller.filter()
+        expect(result).toBe(resultTable)
+      })
+
+      describe('when it recibes something', () => {
+        
+        it('passes it to table.filter', async () => {
+          await controller.filter({ id: 1, nombre: 'Karriem', apellido: 'Riggims' })
+          expect(table.filter).toHaveBeenCalledWith({ id: 1, like: { nombre: 'Karriem', apellido: 'Riggims' } })
         })
         
-        it('calls table.filter', () => {
-          expect(table.filter).toHaveBeenCalled()
+      })
+      
+    })
+
+    describe('when the save function is called', () => {
+      
+      describe('and it recibes an item', () => {
+
+        let result = {}
+        let resultTable = 1
+        let item = { id: 1, nombre: 'Juan José', apellido: 'Saer' }
+        
+        beforeEach(async () => {
+          table.save.mockResolvedValue(resultTable)
+          result = await controller.save(item)
+        })
+        
+        it('passes it to table.save', async () => {
+          expect(table.save).toHaveBeenCalledWith(item)
+        })
+
+        it('returns its result', async () => {
+          expect(result).toBe(resultTable)
+        })
+        
+      })
+      
+    })
+
+    describe('when the remove function is called', () => {
+      
+      describe('and it recibes an id ', () => {
+        
+        let result = {}
+        let resultTable = 1
+        let id = 1
+
+        beforeEach(async () => {
+          table.remove.mockResolvedValue(resultTable)
+          result = await controller.remove({ id })
+        })
+        
+        it('passes it to remove', () => {
+          expect(table.remove).toHaveBeenCalledWith({ id })
+        })
+
+        it('returns its result', () => {
+          expect(result).toBe(resultTable)
         })
         
       })

@@ -1,16 +1,16 @@
 
 export const makeController = ({ table }) => (extend = {}) => Object.create({
 
-  filter: async function() {
-
+  filter: async function({ id, ...like } = {}) {
+    return await table.filter({ id, like })
   },
 
-  save: async function() {
-
+  save: async function(item) {
+    return await table.save(item)
   },
 
-  remove: async function() {
-
+  remove: async function({ id }) {
+    return await table.remove({ id })
   },
   
 }, Object.entries(extend).reduce((result, [key, value]) => {
